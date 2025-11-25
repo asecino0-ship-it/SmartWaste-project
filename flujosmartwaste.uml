@@ -1,0 +1,37 @@
+@startuml
+title Diagrama de Flujo - Simulación Tinkercad (SmartWaste)
+
+start
+:Iniciar sistema;
+:Configurar pines (LED verde, LED rojo, LED amarillo, bombillo normal, switch, sensor ultrasónico);
+:Enviar pulso Trigger al sensor;
+:Medir tiempo de respuesta (Echo);
+:Calcular distancia (cm);
+:Determinar nivel de llenado;
+
+if (Caja llena?) then (Sí)
+  :Encender LED rojo;
+  :Apagar LED verde;
+  :Mostrar "ALERTA: Caja llena";
+else (No)
+  :Encender LED verde;
+  :Apagar LED rojo;
+endif
+
+if (Interruptor activado?) then (Sí)
+  :Encender LED amarillo;
+  :Encender bombillo normal;
+  :Mostrar "Caja abierta manualmente";
+else (No)
+  :Apagar LED amarillo;
+  :Apagar bombillo normal;
+endif
+
+:Enviar datos al monitor serial;
+:Esperar 5 segundos;
+repeat
+  :Leer nueva distancia y estado del interruptor;
+repeat while (Sistema activo?)
+stop
+
+@enduml
